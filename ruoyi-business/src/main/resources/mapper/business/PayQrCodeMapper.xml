@@ -48,6 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
+    <select id="queryByRandomstr" resultType="com.ruoyi.business.domain.PayQrCode">
+        <include refid="selectPayQrCodeVo"/>
+        where randomstr=#{randomstr}
+    </select>
+
     <insert id="insertPayQrCode" parameterType="PayQrCode">
         insert into t_pay_qr_code
         <trim prefix="(" suffix=")" suffixOverrides=",">

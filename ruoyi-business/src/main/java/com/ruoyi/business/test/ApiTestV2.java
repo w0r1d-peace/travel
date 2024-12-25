@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class ApiTestV2 {
 	public static void main(String[] args) throws Exception{
-		testPay();//统一下单，异步类交易
+//		testPay();//统一下单，异步类交易
 //		testScanPay();//统一扫码，被扫交易
 //		testCancel();//撤销
 //		testRefund();//退款
-//		testQuery();//查询
+		testQuery();//查询
 	}
 	
 
@@ -26,7 +26,7 @@ public class ApiTestV2 {
 
 	public static void testQuery() throws Exception{
 		SybPayService service = new SybPayService();
-		Map<String, String> map = service.query("", "241220117332435240");
+		Map<String, String> map = service.query("", "241225116233160232");
 		print(map);
 	}
 	

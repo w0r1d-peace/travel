@@ -6,6 +6,8 @@ import com.ruoyi.business.service.IPayQrCodeService;
 import com.ruoyi.business.service.IPayService;
 import com.ruoyi.business.util.pay.SybPayService;
 import com.ruoyi.common.exception.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.Map;
 
 @Service
 public class IPayServiceImpl implements IPayService {
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IPayQrCodeService payQrCodeService;
@@ -55,5 +58,37 @@ public class IPayServiceImpl implements IPayService {
         }
 
         return null;
+    }
+
+    /**
+     * 查询支付情况
+     * @param randomstr
+     * @return
+     */
+    @Override
+    public boolean queryPayStatus(String randomstr) {
+        PayQrCode payQrCode = payQrCodeService.payQrCodeMapper(randomstr);
+        if (payQrCode == null) {
+            throw new ServiceException("查询支付情况异常，请联系管理员");
+        }
+
+        SybPayService service = new SybPayService();
+        try {
+            Map<String, String> map = service.query("", payQrCode.getTrxid());
+            logger.info(map.toString());
+            if (!map.get("retcode").equals("SUCCESS")) {
+                throw new ServiceException("查询支付情况异常，请联系管理员");
+            }
+
+            String trxstatus =  map.get("trxstatus");
+            if (trxstatus.equals("0000")) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            throw new ServiceException("查询支付情况异常，请联系管理员");
+        }
+
+        return false;
     }
 }

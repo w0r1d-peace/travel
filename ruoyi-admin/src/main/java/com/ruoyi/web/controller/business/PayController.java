@@ -6,6 +6,8 @@ import com.ruoyi.business.util.PayTypeEnum;
 import com.ruoyi.business.util.pay.SybConstants;
 import com.ruoyi.business.util.pay.SybUtil;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.exception.ServiceException;
+import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,6 +78,20 @@ public class PayController {
             response.flushBuffer();
         }
         return AjaxResult.success();
+    }
+
+    /**
+     * 查询支付情况
+     * @return
+     */
+    @PostMapping("/queryPayStatus")
+    public AjaxResult queryPayStatus(String randomstr) throws IOException {
+        if (StringUtils.isBlank(randomstr)) {
+            throw new ServiceException("随机字符串不能为空");
+        }
+
+        boolean status = payService.queryPayStatus(randomstr);
+        return AjaxResult.success(status);
     }
 
     /**

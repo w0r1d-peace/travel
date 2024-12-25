@@ -93,4 +93,14 @@ public class PayQrCodeServiceImpl implements IPayQrCodeService
     {
         return payQrCodeMapper.deletePayQrCodeById(id);
     }
+
+    /**
+     * 查询支付情况
+     * @param randomstr
+     * @return
+     */
+    @Override
+    public PayQrCode payQrCodeMapper(String randomstr) {
+        return payQrCodeMapper.queryByRandomstr(randomstr);
+    }
 }

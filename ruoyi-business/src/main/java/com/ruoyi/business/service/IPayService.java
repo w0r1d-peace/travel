@@ -10,4 +10,11 @@ public interface IPayService {
      * @return
      */
     PayQrCodeVO generatePayQrCode(Long trxamt, String payType);
+
+    /**
+     * 查询支付状态
+     * @param randomstr
+     * @return
+     */
+    boolean queryPayStatus(String randomstr);
 }

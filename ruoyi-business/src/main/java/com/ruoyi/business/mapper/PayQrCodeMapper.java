@@ -2,6 +2,7 @@ package com.ruoyi.business.mapper;
 
 import java.util.List;
 import com.ruoyi.business.domain.PayQrCode;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 支付二维码Mapper接口
@@ -58,4 +59,11 @@ public interface PayQrCodeMapper
      * @return 结果
      */
     public int deletePayQrCodeByIds(Long[] ids);
+
+    /**
+     * 根据随机字符串查询对象
+     * @param randomstr
+     * @return
+     */
+    PayQrCode queryByRandomstr(@Param("randomstr") String randomstr);
 }

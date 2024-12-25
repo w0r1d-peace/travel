@@ -58,4 +58,11 @@ public interface IPayQrCodeService
      * @return 结果
      */
     public int deletePayQrCodeById(Long id);
+
+    /**
+     * 查询支付情况
+     * @param randomstr
+     * @return
+     */
+    PayQrCode payQrCodeMapper(String randomstr);
 }
