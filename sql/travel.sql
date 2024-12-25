@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 19/12/2024 17:50:11
+ Date: 25/12/2024 17:32:04
 */
 
 SET NAMES utf8mb4;
@@ -44,7 +44,7 @@ CREATE TABLE `gen_table`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table
@@ -52,6 +52,7 @@ CREATE TABLE `gen_table`  (
 INSERT INTO `gen_table` VALUES (1, 't_itineraries', '旅游行程表', NULL, NULL, 'Itineraries', 'crud', 'element-ui', 'com.ruoyi.business', 'business', 'itineraries', '旅游行程', 'tangJM.', '0', '/', '{}', 'admin', '2024-12-17 10:58:59', '', '2024-12-17 10:59:29', NULL);
 INSERT INTO `gen_table` VALUES (3, 't_file', '文件表', NULL, NULL, 'File', 'crud', 'element-ui', 'com.ruoyi.business', 'business', 'file', '文件', 'tangJM.', '0', '/', '{}', 'admin', '2024-12-17 11:00:39', '', '2024-12-17 11:01:01', NULL);
 INSERT INTO `gen_table` VALUES (4, 't_payment_agent', '代缴学费表', NULL, NULL, 'PaymentAgent', 'crud', 'element-ui', 'com.ruoyi.business', 'business', 'agent', '代缴学费', 'tangJM.', '0', '/', '{}', 'admin', '2024-12-18 09:09:32', '', '2024-12-18 09:09:57', NULL);
+INSERT INTO `gen_table` VALUES (5, 't_pay_qr_code', '支付二维码表', NULL, NULL, 'PayQrCode', 'crud', 'element-ui', 'com.ruoyi.business', 'business', 'code', '支付二维码', 'tangJM.', '0', '/', '{}', 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14', NULL);
 
 -- ----------------------------
 -- Table structure for gen_table_column
@@ -81,7 +82,7 @@ CREATE TABLE `gen_table_column`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -128,6 +129,22 @@ INSERT INTO `gen_table_column` VALUES (54, 4, 'create_time', '创建时间', 'da
 INSERT INTO `gen_table_column` VALUES (55, 4, 'update_id', '更新者ID', 'int(11)', 'Long', 'updateId', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 15, 'admin', '2024-12-18 09:09:32', '', '2024-12-18 09:09:57');
 INSERT INTO `gen_table_column` VALUES (56, 4, 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', '0', '1', '1', NULL, NULL, 'EQ', 'input', '', 16, 'admin', '2024-12-18 09:09:32', '', '2024-12-18 09:09:57');
 INSERT INTO `gen_table_column` VALUES (57, 4, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', NULL, NULL, 'EQ', 'datetime', '', 17, 'admin', '2024-12-18 09:09:32', '', '2024-12-18 09:09:57');
+INSERT INTO `gen_table_column` VALUES (58, 5, 'id', '主键\r\n', 'int(11)', 'Long', 'id', '1', '0', '0', '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (59, 5, 'appid', '应用ID', 'varchar(255)', 'String', 'appid', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (60, 5, 'cusid', '商户号', 'varchar(255)', 'String', 'cusid', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (61, 5, 'payinfo', '支付串', 'varchar(512)', 'String', 'payinfo', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'textarea', '', 4, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (62, 5, 'randomstr', '随机字符串', 'varchar(255)', 'String', 'randomstr', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (63, 5, 'reqsn', '商户交易单号', 'varchar(255)', 'String', 'reqsn', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (64, 5, 'retcode', '返回码', 'varchar(255)', 'String', 'retcode', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (65, 5, 'sign', '签名', 'varchar(512)', 'String', 'sign', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'textarea', '', 8, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (66, 5, 'trxcode', '交易类型', 'varchar(255)', 'String', 'trxcode', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (67, 5, 'trxid', '交易单号', 'varchar(255)', 'String', 'trxid', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (68, 5, 'trxstatus', '交易状态', 'varchar(255)', 'String', 'trxstatus', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', '', 11, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (69, 5, 'del_flag', '删除标志（0代表存在 1代表删除）', 'char(1)', 'String', 'delFlag', '0', '0', '0', '1', NULL, NULL, NULL, 'EQ', 'input', '', 12, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (70, 5, 'create_by', '创建者', 'varchar(64)', 'String', 'createBy', '0', '0', '0', '1', NULL, NULL, NULL, 'EQ', 'input', '', 13, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (71, 5, 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '0', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 14, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (72, 5, 'update_by', '更新者', 'varchar(64)', 'String', 'updateBy', '0', '0', '0', '1', '1', NULL, NULL, 'EQ', 'input', '', 15, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
+INSERT INTO `gen_table_column` VALUES (73, 5, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', NULL, NULL, 'EQ', 'datetime', '', 16, 'admin', '2024-12-20 13:53:55', '', '2024-12-20 13:54:14');
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -562,7 +579,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status`) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 119 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -586,6 +603,8 @@ INSERT INTO `sys_logininfor` VALUES (115, 'test01', '127.0.0.1', '内网IP', 'Ch
 INSERT INTO `sys_logininfor` VALUES (116, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-18 14:48:26');
 INSERT INTO `sys_logininfor` VALUES (117, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-18 14:49:12');
 INSERT INTO `sys_logininfor` VALUES (118, 'test01', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-18 14:49:19');
+INSERT INTO `sys_logininfor` VALUES (119, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-20 13:51:08');
+INSERT INTO `sys_logininfor` VALUES (120, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-25 10:58:58');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -774,7 +793,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type`) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status`) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 127 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -803,6 +822,9 @@ INSERT INTO `sys_oper_log` VALUES (120, '角色管理', 1, 'com.ruoyi.web.contro
 INSERT INTO `sys_oper_log` VALUES (121, '新增代缴学费', 1, 'com.ruoyi.web.controller.business.PaymentAgentController.add()', 'POST', 1, 'test01', NULL, '/business/agent/add', '127.0.0.1', '内网IP', '{\"admissionNoticeFileId\":\"1\",\"agreementFileId\":\"1\",\"amount\":50,\"cardHolder\":\"张三\",\"cardNumber\":\"12345678\",\"createBy\":\"test01\",\"createId\":101,\"createTime\":\"2024-12-18 14:44:45\",\"idCardBackFileId\":\"1\",\"idCardFrontFileId\":\"1\",\"params\":{},\"paymentType\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'payment_status\' doesn\'t have a default value\r\n### The error may exist in file [D:\\my project\\travel\\ruoyi-business\\target\\classes\\mapper\\business\\PaymentAgentMapper.xml]\r\n### The error may involve com.ruoyi.business.mapper.PaymentAgentMapper.insertPaymentAgent-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into t_payment_agent          ( agreement_file_id,             admission_notice_file_id,             id_card_front_file_id,             id_card_back_file_id,             payment_type,             card_holder,             card_number,             amount,                                       create_id,             create_by,             create_time )           values ( ?,             ?,             ?,             ?,             ?,             ?,             ?,             ?,                                       ?,             ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'payment_status\' doesn\'t have a default value\n; Field \'payment_status\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'payment_status\' doesn\'t have a default value', '2024-12-18 14:44:45', 78);
 INSERT INTO `sys_oper_log` VALUES (122, '新增代缴学费', 1, 'com.ruoyi.web.controller.business.PaymentAgentController.add()', 'POST', 1, 'test01', NULL, '/business/agent/add', '127.0.0.1', '内网IP', '{\"admissionNoticeFileId\":\"1\",\"agreementFileId\":\"1\",\"amount\":50,\"cardHolder\":\"张三\",\"cardNumber\":\"12345678\",\"createBy\":\"test01\",\"createId\":101,\"createTime\":\"2024-12-18 14:46:42\",\"id\":1,\"idCardBackFileId\":\"1\",\"idCardFrontFileId\":\"1\",\"params\":{},\"paymentStatus\":1,\"paymentType\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-18 14:46:42', 51);
 INSERT INTO `sys_oper_log` VALUES (123, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '研发部门', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createTime\":\"2024-12-18 14:31:37\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2019,\"menuName\":\"查询注册用户的交费列表\",\"menuType\":\"F\",\"orderNum\":6,\"params\":{},\"parentId\":2006,\"path\":\"\",\"perms\":\"business:agent:byCreateId\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-18 14:49:08', 18);
+INSERT INTO `sys_oper_log` VALUES (124, '代码生成', 6, 'com.ruoyi.generator.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":\"t_pay_qr_code\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-20 13:53:55', 194);
+INSERT INTO `sys_oper_log` VALUES (125, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', '研发部门', '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"code\",\"className\":\"PayQrCode\",\"columns\":[{\"capJavaField\":\"Id\",\"columnComment\":\"主键\\r\\n\",\"columnId\":58,\"columnName\":\"id\",\"columnType\":\"int(11)\",\"createBy\":\"admin\",\"createTime\":\"2024-12-20 13:53:55\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isPk\":\"1\",\"isRequired\":\"0\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Appid\",\"columnComment\":\"应用ID\",\"columnId\":59,\"columnName\":\"appid\",\"columnType\":\"varchar(255)\",\"createBy\":\"admin\",\"createTime\":\"2024-12-20 13:53:55\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"0\",\"javaField\":\"appid\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":false,\"sort\":2,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Cusid\",\"columnComment\":\"商户号\",\"columnId\":60,\"columnName\":\"cusid\",\"columnType\":\"varchar(255)\",\"createBy\":\"admin\",\"createTime\":\"2024-12-20 13:53:55\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"0\",\"javaField\":\"cusid\",\"javaType\":\"String\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":false,\"sort\":3,\"superColumn\":false,\"tableId\":5,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Payinfo\",\"columnComment\":\"支付串\",\"columnId\":61,\"columnName\":\"payinfo\",\"columnType\":\"varchar(512)\",\"createBy\":\"admin\",\"createTime\":\"2024-12-20 13:53:55\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"textarea\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"isRequired\":\"0\",\"javaField\":\"payinfo\",\"j', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-20 13:54:14', 71);
+INSERT INTO `sys_oper_log` VALUES (126, '代码生成', 8, 'com.ruoyi.generator.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":\"t_pay_qr_code\"}', NULL, 0, NULL, '2024-12-20 13:54:22', 185);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1012,7 +1034,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-12-18 14:48:26', 'admin', '2024-12-16 09:55:11', '', '2024-12-18 14:48:26', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-12-25 10:58:58', 'admin', '2024-12-16 09:55:11', '', '2024-12-25 10:58:58', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-12-16 09:55:11', 'admin', '2024-12-16 09:55:11', '', NULL, '测试员');
 INSERT INTO `sys_user` VALUES (101, NULL, 'test01', 'test01', '00', '', '', '0', '', '$2a$10$.wq0MhsICNdtIJwtHh3b5OBdhp6eGyZ6bkHBX0gkWYuXqTHZxce8m', '0', '0', '127.0.0.1', '2024-12-18 14:49:19', '', '2024-12-18 14:39:49', '', '2024-12-18 14:49:19', NULL);
 
@@ -1100,6 +1122,38 @@ CREATE TABLE `t_itineraries`  (
 -- ----------------------------
 INSERT INTO `t_itineraries` VALUES (1, '香港5日4晚欢乐游玩', '深港联动，一次打卡两个浪漫城市！一整天迪斯尼乐园，全天自由畅玩，七大项目区/花车巡游/烟花秀，迪士尼经典项目玩到爽。', '<body><h1>香港旅游推荐</h1><h2>维多利亚港</h2><p>维多利亚港简称维港，地处香港岛（中环、湾仔）与九龙半岛（尖沙咀）之间，因迷人海景和夜景，成为游客来港必到之地。入夜后万家灯火，相互辉映，维港夜景因而与函馆、那不勒斯并列“世界三大夜景”。</p><p>维多利亚港每晚8点上演的大型灯光汇演“幻彩咏香江”值得期待，40余栋大楼配合着充满节奏感的音乐，发出缤纷跃动的灯光令人目眩神迷。南岸香港岛有充满现代感的知名高楼大厦——中银大厦、国金中心，香港会议展览中心，这些都是TVB电视剧的常客。北岸九龙则有星光大道、天星码头，这里也是观赏维港景致和“幻彩咏香江”的好位置。</p><p>若想更好的欣赏维港，可以参加维港海上游观光团，登上观光船或者中式帆船，置身海港中央，以全新角度感受香港的活力和动感，感受维港的美。</p><p>每逢元旦前夜和农历年初二晚上，维港都会举行盛大的烟花表演，两岸的高楼也会参与其中，将夜空装点的格外耀眼，近年更吸引数十万名香港及内地民众，聚集在维多利亚港两岸庆祝新年的来临。</p><h2>香港迪士尼乐园</h2><p>欢迎来到梦境成真的奇妙世界——香港迪士尼乐园度假区！度假区包括一个主题乐园和三家酒店, 一直不断为世界各地不同喜好的宾客缔造奇妙的迪士尼体验。全新城堡的设计灵感来自13个有关经典迪士尼公主和女王的故事，象征勇气、希望和无尽可能。</p><p>在这里，您将更有机会走进充满皇室华丽的“皇室礼宾庭”与心爱的公主和女王见面。奇妙梦想城堡故事展以多媒体方式呈现华特迪士尼幻想工程师由城堡概念设计到建成的奥秘从设计新城堡至完工的过程，带您探索城堡华丽变身的奇妙故事。</p></body>', '张三', '2024-12-17 00:00:00', 1, 3, '0', 'admin', '2024-12-17 11:43:30', '', NULL);
 INSERT INTO `t_itineraries` VALUES (2, '香港5日4晚欢乐游玩test', '深港联动，一次打卡两个浪漫城市！一整天迪斯尼乐园，全天自由畅玩，七大项目区/花车巡游/烟花秀，迪士尼经典项目玩到爽。', '<body><h1>香港旅游推荐</h1><h2>维多利亚港</h2><p>维多利亚港简称维港，地处香港岛（中环、湾仔）与九龙半岛（尖沙咀）之间，因迷人海景和夜景，成为游客来港必到之地。入夜后万家灯火，相互辉映，维港夜景因而与函馆、那不勒斯并列“世界三大夜景”。</p><p>维多利亚港每晚8点上演的大型灯光汇演“幻彩咏香江”值得期待，40余栋大楼配合着充满节奏感的音乐，发出缤纷跃动的灯光令人目眩神迷。南岸香港岛有充满现代感的知名高楼大厦——中银大厦、国金中心，香港会议展览中心，这些都是TVB电视剧的常客。北岸九龙则有星光大道、天星码头，这里也是观赏维港景致和“幻彩咏香江”的好位置。</p><p>若想更好的欣赏维港，可以参加维港海上游观光团，登上观光船或者中式帆船，置身海港中央，以全新角度感受香港的活力和动感，感受维港的美。</p><p>每逢元旦前夜和农历年初二晚上，维港都会举行盛大的烟花表演，两岸的高楼也会参与其中，将夜空装点的格外耀眼，近年更吸引数十万名香港及内地民众，聚集在维多利亚港两岸庆祝新年的来临。</p><h2>香港迪士尼乐园</h2><p>欢迎来到梦境成真的奇妙世界——香港迪士尼乐园度假区！度假区包括一个主题乐园和三家酒店, 一直不断为世界各地不同喜好的宾客缔造奇妙的迪士尼体验。全新城堡的设计灵感来自13个有关经典迪士尼公主和女王的故事，象征勇气、希望和无尽可能。</p><p>在这里，您将更有机会走进充满皇室华丽的“皇室礼宾庭”与心爱的公主和女王见面。奇妙梦想城堡故事展以多媒体方式呈现华特迪士尼幻想工程师由城堡概念设计到建成的奥秘从设计新城堡至完工的过程，带您探索城堡华丽变身的奇妙故事。</p></body>test', '李四', '2024-12-17 00:00:00', 2, 0, '1', 'admin', '2024-12-17 11:46:37', 'admin', '2024-12-17 11:56:16');
+
+-- ----------------------------
+-- Table structure for t_pay_qr_code
+-- ----------------------------
+DROP TABLE IF EXISTS `t_pay_qr_code`;
+CREATE TABLE `t_pay_qr_code`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键\r\n',
+  `appid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '应用ID',
+  `cusid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商户号',
+  `payinfo` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付串',
+  `randomstr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '随机字符串',
+  `reqsn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商户交易单号',
+  `retcode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '返回码',
+  `sign` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '签名',
+  `trxcode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '交易类型',
+  `trxid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '交易单号',
+  `trxstatus` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '交易状态',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 1代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '支付二维码表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_pay_qr_code
+-- ----------------------------
+INSERT INTO `t_pay_qr_code` VALUES (1, '00000003', '990440148166000', 'https://qr.alipay.com/bax09794zz5knvftbfbn253e', '984142018273', '1735096691886', 'SUCCESS', 'EsTpd/x0iAY8erFnUbzl/I0A9ROI9PCHzP+Fa+8hhLMTky9aPlHL1RvtcLtWs1rDPO4H00OOt95ziORheLfV4g==', 'VSP511', '241225113433128405', '0000', '0', '', '2024-12-25 11:18:26', '', NULL);
+INSERT INTO `t_pay_qr_code` VALUES (2, '00000003', '990440148166000', 'https://qr.alipay.com/bax04121rhvuea82zrur007c', '669066676720', '1735096878537', 'SUCCESS', 'jwAom6N3chHlF6Pa8vYsWUYwNeoRLZ3LitFX1FBoisQK1xDrUpqzjE8zfR49zpS+qcgit4wmIeGdsUvUDXting==', 'VSP511', '241225116033131065', '0000', '0', '', '2024-12-25 11:21:19', '', NULL);
+INSERT INTO `t_pay_qr_code` VALUES (3, '00000003', '990440148166000', 'https://qr.alipay.com/bax04236uyvm0tfh4ilc5567', '688403682049', '1735098181990', 'SUCCESS', 'VqauD/+BhOrNEkJY/z4bjE4+LonJMDCFmhjqUtbIPwX5IM+B/zjoKtyXO8MNZArYjOHPhtMVHdaWKE5FtOjZfQ==', 'VSP511', '241225113233136069', '0000', '0', '', '2024-12-25 11:43:03', '', NULL);
+INSERT INTO `t_pay_qr_code` VALUES (4, '00000003', '990440148166000', 'https://syb.allinpay.com/apiweb/h5unionpay/native?key=M0nSWuHMvQm%2BON%2F4iJ8VnLL2', '012728655615', '1735099203379', 'SUCCESS', '1pyAnnKxbRi+b1qof2BXsYhrTKcp0k6duJZOVzb/d1PudlMjQVqA4j9quC/9RNDNgvl3hwSxpVQvVtu4GLa9PA==', 'VSP501', '241225116233160232', '0000', '0', '', '2024-12-25 12:00:04', '', NULL);
 
 -- ----------------------------
 -- Table structure for t_payment_agent
