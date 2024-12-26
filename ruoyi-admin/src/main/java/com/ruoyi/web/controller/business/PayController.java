@@ -2,6 +2,7 @@ package com.ruoyi.web.controller.business;
 
 import com.ruoyi.business.domain.vo.PayQrCodeVO;
 import com.ruoyi.business.service.IPayService;
+import com.ruoyi.business.service.ITransactionDetailsService;
 import com.ruoyi.business.util.PayTypeEnum;
 import com.ruoyi.business.util.pay.SybConstants;
 import com.ruoyi.business.util.pay.SybUtil;
@@ -26,6 +27,9 @@ public class PayController {
 
     @Autowired
     private IPayService payService;
+
+    @Autowired
+    private ITransactionDetailsService transactionDetailsService;
 
     /**
      * 生成支付二维码
@@ -69,6 +73,8 @@ public class PayController {
                 appkey = SybConstants.SYB_MD5_APPKEY;
             boolean isSign = SybUtil.validSign(params, appkey, params.get("signtype"));// 接受到推送通知,首先验签
             System.out.println("验签结果:"+isSign);
+            // 保存交易明细
+            transactionDetailsService.saveTransactionDetails(params);
             //验签完毕进行业务处理
         } catch (Exception e) {//处理异常
             e.printStackTrace();

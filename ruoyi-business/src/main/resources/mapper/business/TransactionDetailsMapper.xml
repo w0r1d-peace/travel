@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.TransactionDetailsMapper">
+    
+    <resultMap type="TransactionDetails" id="TransactionDetailsResult">
+        <result property="id"    column="id"    />
+        <result property="cusid"    column="cusid"    />
+        <result property="appid"    column="appid"    />
+        <result property="trxid"    column="trxid"    />
+        <result property="chnltrxid"    column="chnltrxid"    />
+        <result property="reqsn"    column="reqsn"    />
+        <result property="trxcode"    column="trxcode"    />
+        <result property="trxamt"    column="trxamt"    />
+        <result property="trxstatus"    column="trxstatus"    />
+        <result property="acct"    column="acct"    />
+        <result property="fintime"    column="fintime"    />
+        <result property="randomstr"    column="randomstr"    />
+        <result property="errmsg"    column="errmsg"    />
+        <result property="cmid"    column="cmid"    />
+        <result property="chnlid"    column="chnlid"    />
+        <result property="initamt"    column="initamt"    />
+        <result property="fee"    column="fee"    />
+        <result property="chnldata"    column="chnldata"    />
+        <result property="accttype"    column="accttype"    />
+        <result property="bankcode"    column="bankcode"    />
+        <result property="logonid"    column="logonid"    />
+        <result property="sign"    column="sign"    />
+    </resultMap>
+
+    <sql id="selectTransactionDetailsVo">
+        select id, cusid, appid, trxid, chnltrxid, reqsn, trxcode, trxamt, trxstatus, acct, fintime, randomstr, errmsg, cmid, chnlid, initamt, fee, chnldata, accttype, bankcode, logonid, sign from t_transaction_details
+    </sql>
+
+    <select id="selectTransactionDetailsList" parameterType="TransactionDetails" resultMap="TransactionDetailsResult">
+        <include refid="selectTransactionDetailsVo"/>
+        <where>  
+            <if test="cusid != null  and cusid != ''"> and cusid = #{cusid}</if>
+            <if test="appid != null  and appid != ''"> and appid = #{appid}</if>
+            <if test="trxid != null  and trxid != ''"> and trxid = #{trxid}</if>
+            <if test="chnltrxid != null  and chnltrxid != ''"> and chnltrxid = #{chnltrxid}</if>
+            <if test="reqsn != null  and reqsn != ''"> and reqsn = #{reqsn}</if>
+            <if test="trxcode != null  and trxcode != ''"> and trxcode = #{trxcode}</if>
+            <if test="trxamt != null "> and trxamt = #{trxamt}</if>
+            <if test="trxstatus != null  and trxstatus != ''"> and trxstatus = #{trxstatus}</if>
+            <if test="acct != null  and acct != ''"> and acct = #{acct}</if>
+            <if test="fintime != null  and fintime != ''"> and fintime = #{fintime}</if>
+            <if test="randomstr != null  and randomstr != ''"> and randomstr = #{randomstr}</if>
+            <if test="errmsg != null  and errmsg != ''"> and errmsg = #{errmsg}</if>
+            <if test="cmid != null  and cmid != ''"> and cmid = #{cmid}</if>
+            <if test="chnlid != null  and chnlid != ''"> and chnlid = #{chnlid}</if>
+            <if test="initamt != null "> and initamt = #{initamt}</if>
+            <if test="fee != null "> and fee = #{fee}</if>
+            <if test="chnldata != null  and chnldata != ''"> and chnldata = #{chnldata}</if>
+            <if test="accttype != null  and accttype != ''"> and accttype = #{accttype}</if>
+            <if test="bankcode != null  and bankcode != ''"> and bankcode = #{bankcode}</if>
+            <if test="logonid != null  and logonid != ''"> and logonid = #{logonid}</if>
+            <if test="sign != null  and sign != ''"> and sign = #{sign}</if>
+        </where>
+    </select>
+    
+    <select id="selectTransactionDetailsById" parameterType="Long" resultMap="TransactionDetailsResult">
+        <include refid="selectTransactionDetailsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTransactionDetails" parameterType="TransactionDetails">
+        insert into t_transaction_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="cusid != null">cusid,</if>
+            <if test="appid != null">appid,</if>
+            <if test="trxid != null">trxid,</if>
+            <if test="chnltrxid != null">chnltrxid,</if>
+            <if test="reqsn != null">reqsn,</if>
+            <if test="trxcode != null">trxcode,</if>
+            <if test="trxamt != null">trxamt,</if>
+            <if test="trxstatus != null">trxstatus,</if>
+            <if test="acct != null">acct,</if>
+            <if test="fintime != null">fintime,</if>
+            <if test="randomstr != null">randomstr,</if>
+            <if test="errmsg != null">errmsg,</if>
+            <if test="cmid != null">cmid,</if>
+            <if test="chnlid != null">chnlid,</if>
+            <if test="initamt != null">initamt,</if>
+            <if test="fee != null">fee,</if>
+            <if test="chnldata != null">chnldata,</if>
+            <if test="accttype != null">accttype,</if>
+            <if test="bankcode != null">bankcode,</if>
+            <if test="logonid != null">logonid,</if>
+            <if test="sign != null">sign,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="cusid != null">#{cusid},</if>
+            <if test="appid != null">#{appid},</if>
+            <if test="trxid != null">#{trxid},</if>
+            <if test="chnltrxid != null">#{chnltrxid},</if>
+            <if test="reqsn != null">#{reqsn},</if>
+            <if test="trxcode != null">#{trxcode},</if>
+            <if test="trxamt != null">#{trxamt},</if>
+            <if test="trxstatus != null">#{trxstatus},</if>
+            <if test="acct != null">#{acct},</if>
+            <if test="fintime != null">#{fintime},</if>
+            <if test="randomstr != null">#{randomstr},</if>
+            <if test="errmsg != null">#{errmsg},</if>
+            <if test="cmid != null">#{cmid},</if>
+            <if test="chnlid != null">#{chnlid},</if>
+            <if test="initamt != null">#{initamt},</if>
+            <if test="fee != null">#{fee},</if>
+            <if test="chnldata != null">#{chnldata},</if>
+            <if test="accttype != null">#{accttype},</if>
+            <if test="bankcode != null">#{bankcode},</if>
+            <if test="logonid != null">#{logonid},</if>
+            <if test="sign != null">#{sign},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTransactionDetails" parameterType="TransactionDetails">
+        update t_transaction_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cusid != null">cusid = #{cusid},</if>
+            <if test="appid != null">appid = #{appid},</if>
+            <if test="trxid != null">trxid = #{trxid},</if>
+            <if test="chnltrxid != null">chnltrxid = #{chnltrxid},</if>
+            <if test="reqsn != null">reqsn = #{reqsn},</if>
+            <if test="trxcode != null">trxcode = #{trxcode},</if>
+            <if test="trxamt != null">trxamt = #{trxamt},</if>
+            <if test="trxstatus != null">trxstatus = #{trxstatus},</if>
+            <if test="acct != null">acct = #{acct},</if>
+            <if test="fintime != null">fintime = #{fintime},</if>
+            <if test="randomstr != null">randomstr = #{randomstr},</if>
+            <if test="errmsg != null">errmsg = #{errmsg},</if>
+            <if test="cmid != null">cmid = #{cmid},</if>
+            <if test="chnlid != null">chnlid = #{chnlid},</if>
+            <if test="initamt != null">initamt = #{initamt},</if>
+            <if test="fee != null">fee = #{fee},</if>
+            <if test="chnldata != null">chnldata = #{chnldata},</if>
+            <if test="accttype != null">accttype = #{accttype},</if>
+            <if test="bankcode != null">bankcode = #{bankcode},</if>
+            <if test="logonid != null">logonid = #{logonid},</if>
+            <if test="sign != null">sign = #{sign},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTransactionDetailsById" parameterType="Long">
+        delete from t_transaction_details where id = #{id}
+    </delete>
+
+    <delete id="deleteTransactionDetailsByIds" parameterType="String">
+        delete from t_transaction_details where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

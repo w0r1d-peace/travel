@@ -31,7 +31,7 @@ public class IPayServiceImpl implements IPayService {
         SybPayService service = new SybPayService();
         String reqsn = String.valueOf(System.currentTimeMillis());
         try {
-            Map<String, String> map = service.pay(trxamt, reqsn, payType, "", "", "", "120",null,"","","","", "", "", "", "", "", "", "","");
+            Map<String, String> map = service.pay(trxamt, reqsn, payType, "测试body", "测试remark", "", "120","http://113.45.139.88:8081/business/pay/callback","","","","", "", "", "", "", "", "", "","");
             if (!map.get("retcode").equals("SUCCESS")) {
                 throw new ServiceException("生成二维码异常，请联系管理员");
             }
