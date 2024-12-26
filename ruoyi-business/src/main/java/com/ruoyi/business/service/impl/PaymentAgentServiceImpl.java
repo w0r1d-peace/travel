@@ -1,7 +1,9 @@
 package com.ruoyi.business.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ruoyi.business.domain.vo.PaymentAgentListVO;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.DateUtils;
@@ -40,13 +42,13 @@ public class PaymentAgentServiceImpl implements IPaymentAgentService
     /**
      * 查询代缴学费列表
      * 
-     * @param paymentAgent 代缴学费
+     * @param createId 代缴学费
      * @return 代缴学费
      */
     @Override
-    public List<PaymentAgent> selectPaymentAgentList(PaymentAgent paymentAgent)
+    public List<PaymentAgentListVO> selectPaymentAgentList(Long createId)
     {
-        return paymentAgentMapper.selectPaymentAgentList(paymentAgent);
+        return paymentAgentMapper.selectPaymentAgentList2(createId);
     }
 
     /**
@@ -56,7 +58,7 @@ public class PaymentAgentServiceImpl implements IPaymentAgentService
      * @return 结果
      */
     @Override
-    public int insertPaymentAgent(PaymentAgent paymentAgent)
+    public Long insertPaymentAgent(PaymentAgent paymentAgent)
     {
         LoginUser loginUser = getLoginUser();
         SysUser user = loginUser.getUser();
@@ -64,7 +66,8 @@ public class PaymentAgentServiceImpl implements IPaymentAgentService
         paymentAgent.setCreateId(user.getUserId());
         paymentAgent.setCreateBy(user.getUserName());
         paymentAgent.setCreateTime(DateUtils.getNowDate());
-        return paymentAgentMapper.insertPaymentAgent(paymentAgent);
+        paymentAgentMapper.insertPaymentAgent(paymentAgent);
+        return paymentAgent.getId();
     }
 
     /**
@@ -112,4 +115,5 @@ public class PaymentAgentServiceImpl implements IPaymentAgentService
     {
         return paymentAgentMapper.deletePaymentAgentById(id);
     }
+
 }

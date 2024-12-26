@@ -26,7 +26,7 @@ public class ApiTestV2 {
 
 	public static void testQuery() throws Exception{
 		SybPayService service = new SybPayService();
-		Map<String, String> map = service.query("", "241225116233160232");
+		Map<String, String> map = service.query("", "241225113233136069");
 		print(map);
 	}
 	

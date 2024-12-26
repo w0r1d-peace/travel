@@ -2,6 +2,7 @@ package com.ruoyi.business.service.impl;
 
 import com.ruoyi.business.domain.PayQrCode;
 import com.ruoyi.business.domain.vo.PayQrCodeVO;
+import com.ruoyi.business.mapper.PaymentAgentMapper;
 import com.ruoyi.business.service.IPayQrCodeService;
 import com.ruoyi.business.service.IPayService;
 import com.ruoyi.business.util.pay.SybPayService;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -20,6 +22,9 @@ public class IPayServiceImpl implements IPayService {
     @Autowired
     private IPayQrCodeService payQrCodeService;
 
+    @Autowired
+    private PaymentAgentMapper paymentAgentMapper;
+
     /**
      * 生成支付二维码
      * @param trxamt
@@ -27,11 +32,12 @@ public class IPayServiceImpl implements IPayService {
      * @return
      */
     @Override
-    public PayQrCodeVO generatePayQrCode(Long trxamt, String payType) {
+    @Transactional(rollbackFor = Exception.class)
+    public PayQrCodeVO generatePayQrCode(Long id, Long trxamt, String payType) {
         SybPayService service = new SybPayService();
         String reqsn = String.valueOf(System.currentTimeMillis());
         try {
-            Map<String, String> map = service.pay(trxamt, reqsn, payType, "测试body", "测试remark", "", "120","http://113.45.139.88:8081/business/pay/callback","","","","", "", "", "", "", "", "", "","");
+            Map<String, String> map = service.pay(trxamt, reqsn, payType, "", "", "", "","http://113.45.139.88:8081/business/pay/callback","","","","", "", "", "", "", "", "", "","");
             if (!map.get("retcode").equals("SUCCESS")) {
                 throw new ServiceException("生成二维码异常，请联系管理员");
             }
@@ -49,15 +55,15 @@ public class IPayServiceImpl implements IPayService {
             payQrCode.setTrxstatus(map.get("trxstatus"));
             payQrCodeService.insertPayQrCode(payQrCode);
 
-
             PayQrCodeVO payQrCodeVO = new PayQrCodeVO();
             payQrCodeVO.setPayinfo(map.get("payinfo"));
+            payQrCodeVO.setRandomstr(map.get("randomstr"));
 
+            paymentAgentMapper.updateTrxid(id, map.get("trxid"));
+            return payQrCodeVO;
         } catch (Exception e) {
             throw new ServiceException("生成二维码异常，请联系管理员");
         }
-
-        return null;
     }
 
     /**
@@ -82,6 +88,7 @@ public class IPayServiceImpl implements IPayService {
 
             String trxstatus =  map.get("trxstatus");
             if (trxstatus.equals("0000")) {
+                paymentAgentMapper.updatePaymentStatusByTrxid(payQrCode.getTrxid());
                 return true;
             }
 

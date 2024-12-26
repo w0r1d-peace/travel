@@ -80,10 +80,20 @@ public class SysRegisterService
         else if (!userService.checkUserNameUnique(sysUser))
         {
             msg = "保存用户'" + username + "'失败，注册账号已存在";
+        } else if (registerBody.getNickName() == null) {
+            msg = "昵称不能为空";
+        } else if (registerBody.getNickName().length() > 30) {
+            msg = "昵称长度不能超过30个字符";
+        } else if (registerBody.getEmail() != null && registerBody.getEmail().length() > 50) {
+            msg = "邮箱长度不能超过50个字符";
+        } else if (registerBody.getPhonenumber() != null && registerBody.getPhonenumber().length() > 11) {
+            msg = "手机号码长度不能超过11个字符";
         }
         else
         {
-            sysUser.setNickName(username);
+            sysUser.setNickName(registerBody.getNickName());
+            sysUser.setEmail(registerBody.getEmail());
+            sysUser.setPhonenumber(registerBody.getPhonenumber());
             sysUser.setPassword(SecurityUtils.encryptPassword(password));
             boolean regFlag = userService.registerUser(sysUser);
 

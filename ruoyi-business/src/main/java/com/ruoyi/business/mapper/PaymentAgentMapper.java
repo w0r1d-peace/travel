@@ -2,6 +2,7 @@ package com.ruoyi.business.mapper;
 
 import java.util.List;
 import com.ruoyi.business.domain.PaymentAgent;
+import com.ruoyi.business.domain.vo.PaymentAgentListVO;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -59,4 +60,24 @@ public interface PaymentAgentMapper
      * @return 结果
      */
     public int deletePaymentAgentByIds(@Param("idList") List<Integer> idList, @Param("updateId") Long updateId, @Param("updateBy") String updateBy);
+
+    /**
+     * 根据交易明细更新付款状态
+     * @param trxid
+     */
+    void updatePaymentStatusByTrxid(@Param("trxid") String trxid);
+
+    /**
+     * 根据代缴学费ID更新交易单号
+     * @param id
+     * @param trxid
+     */
+    void updateTrxid(@Param("id") Long id, @Param("trxid") String trxid);
+
+    /**
+     * 查询代缴学费列表
+     * @param createId
+     * @return
+     */
+    List<PaymentAgentListVO> selectPaymentAgentList2(@Param("createId") Long createId);
 }

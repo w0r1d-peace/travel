@@ -2,6 +2,7 @@ package com.ruoyi.business.service;
 
 import java.util.List;
 import com.ruoyi.business.domain.PaymentAgent;
+import com.ruoyi.business.domain.vo.PaymentAgentListVO;
 
 /**
  * 代缴学费Service接口
@@ -22,10 +23,10 @@ public interface IPaymentAgentService
     /**
      * 查询代缴学费列表
      * 
-     * @param paymentAgent 代缴学费
+     * @param createId 代缴学费
      * @return 代缴学费集合
      */
-    public List<PaymentAgent> selectPaymentAgentList(PaymentAgent paymentAgent);
+    public List<PaymentAgentListVO> selectPaymentAgentList(Long createId);
 
     /**
      * 新增代缴学费
@@ -33,7 +34,7 @@ public interface IPaymentAgentService
      * @param paymentAgent 代缴学费
      * @return 结果
      */
-    public int insertPaymentAgent(PaymentAgent paymentAgent);
+    public Long insertPaymentAgent(PaymentAgent paymentAgent);
 
     /**
      * 修改代缴学费

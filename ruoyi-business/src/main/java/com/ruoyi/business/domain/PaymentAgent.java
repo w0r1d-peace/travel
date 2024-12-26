@@ -55,6 +55,11 @@ public class PaymentAgent extends BaseEntity
     @Excel(name = "付款状态 1.待付款 2.已付款 3.失败等")
     private Integer paymentStatus;
 
+    /**
+     * 交易单号
+     */
+    private String trxid;
+
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
 
@@ -156,7 +161,16 @@ public class PaymentAgent extends BaseEntity
     {
         return paymentStatus;
     }
-    public void setDelFlag(String delFlag) 
+
+    public String getTrxid() {
+        return trxid;
+    }
+
+    public void setTrxid(String trxid) {
+        this.trxid = trxid;
+    }
+
+    public void setDelFlag(String delFlag)
     {
         this.delFlag = delFlag;
     }

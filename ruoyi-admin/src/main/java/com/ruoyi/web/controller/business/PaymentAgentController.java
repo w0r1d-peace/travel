@@ -3,6 +3,7 @@ package com.ruoyi.web.controller.business;
 import java.util.List;
 
 import com.ruoyi.business.domain.dto.DeleteDTO;
+import com.ruoyi.business.domain.vo.PaymentAgentListVO;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,7 +22,6 @@ import com.ruoyi.business.domain.PaymentAgent;
 import com.ruoyi.business.service.IPaymentAgentService;
 import com.ruoyi.common.core.page.TableDataInfo;
 
-import static com.ruoyi.common.utils.SecurityUtils.getLoginUser;
 
 /**
  * 代缴学费Controller
@@ -46,9 +46,8 @@ public class PaymentAgentController extends BaseController
     {
         LoginUser loginUser = getLoginUser();
         SysUser user = loginUser.getUser();
-        paymentAgent.setCreateId(user.getUserId());
         startPage();
-        List<PaymentAgent> list = paymentAgentService.selectPaymentAgentList(paymentAgent);
+        List<PaymentAgentListVO> list = paymentAgentService.selectPaymentAgentList(user.getUserId());
         return getDataTable(list);
     }
 
@@ -60,7 +59,7 @@ public class PaymentAgentController extends BaseController
     public TableDataInfo list(PaymentAgent paymentAgent)
     {
         startPage();
-        List<PaymentAgent> list = paymentAgentService.selectPaymentAgentList(paymentAgent);
+        List<PaymentAgentListVO> list = paymentAgentService.selectPaymentAgentList(null);
         return getDataTable(list);
     }
 
@@ -82,7 +81,7 @@ public class PaymentAgentController extends BaseController
     @PostMapping("/add")
     public AjaxResult add(@RequestBody PaymentAgent paymentAgent)
     {
-        return toAjax(paymentAgentService.insertPaymentAgent(paymentAgent));
+        return success(paymentAgentService.insertPaymentAgent(paymentAgent));
     }
 
     /**

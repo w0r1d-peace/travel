@@ -9,7 +9,7 @@ public interface IPayService {
      * @param payType
      * @return
      */
-    PayQrCodeVO generatePayQrCode(Long trxamt, String payType);
+    PayQrCodeVO generatePayQrCode(Long id, Long trxamt, String payType);
 
     /**
      * 查询支付状态

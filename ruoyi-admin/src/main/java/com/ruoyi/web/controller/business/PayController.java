@@ -10,6 +10,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +35,13 @@ public class PayController {
     /**
      * 生成支付二维码
      */
+    @PreAuthorize("@ss.hasPermi('generate:pay:qrcode')")
     @GetMapping("/generatePayQrCode")
-    public AjaxResult generatePayQrCode(Long trxamt, String payType) {
+    public AjaxResult generatePayQrCode(Long id, Long trxamt, String payType) {
+        if (id == null) {
+            return AjaxResult.error("ID不能为空");
+        }
+
         if (trxamt == null) {
             return AjaxResult.error("金额不能为空");
         }
@@ -47,7 +53,7 @@ public class PayController {
             throw new RuntimeException("支付类型不存在");
         }
 
-        PayQrCodeVO payQrCodeVO = payService.generatePayQrCode(trxamt, payType);
+        PayQrCodeVO payQrCodeVO = payService.generatePayQrCode(id, trxamt, payType);
         return AjaxResult.success(payQrCodeVO);
     }
 
@@ -90,7 +96,8 @@ public class PayController {
      * 查询支付情况
      * @return
      */
-    @PostMapping("/queryPayStatus")
+    @PreAuthorize("@ss.hasPermi('query:pay:status')")
+    @GetMapping("/queryPayStatus")
     public AjaxResult queryPayStatus(String randomstr) throws IOException {
         if (StringUtils.isBlank(randomstr)) {
             throw new ServiceException("随机字符串不能为空");

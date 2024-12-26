@@ -3,6 +3,7 @@ package com.ruoyi.business.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.ruoyi.business.mapper.PaymentAgentMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class TransactionDetailsServiceImpl implements ITransactionDetailsService
 {
     @Autowired
     private TransactionDetailsMapper transactionDetailsMapper;
+
+    @Autowired
+    private PaymentAgentMapper paymentAgentMapper;
 
     /**
      * 查询交易明细
@@ -104,5 +108,11 @@ public class TransactionDetailsServiceImpl implements ITransactionDetailsService
         TransactionDetails transactionDetails = new TransactionDetails();
         BeanUtils.copyProperties(params, transactionDetails);
         transactionDetailsMapper.insertTransactionDetails(transactionDetails);
+
+        String trxstatus = transactionDetails.getTrxstatus();
+        if (trxstatus.equals("0000")) {
+            String trxid = transactionDetails.getTrxid();
+            paymentAgentMapper.updatePaymentStatusByTrxid(trxid);
+        }
     }
 }
